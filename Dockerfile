@@ -1,4 +1,5 @@
 FROM nginx:1.15-alpine
+COPY config/ /etc/nginx/
 RUN rm -f /var/log/nginx/access.log /var/log/nginx/error.log &&\
     touch /var/log/nginx/access.log /var/log/nginx/error.log &&\
     echo -e '#!/bin/sh\ndatetime(){\n    TZ="Asia/Shanghai" /bin/date "+%Y%m%d%H%M"\n}\nDATE_TIME=$(datetime)\n/bin/mv /var/log/nginx/access.log /var/log/nginx/access.${DATE_TIME}.log\n/bin/mv /var/log/nginx/error.log /var/log/nginx/error.${DATE_TIME}.log\n/bin/kill -USR1 `/bin/cat /var/run/nginx.pid`' > /etc/periodic/hourly/rotatelog.sh &&\
