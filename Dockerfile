@@ -1,4 +1,4 @@
-FROM nginx:1.15-alpine
+FROM nginx:1.18-alpine
 COPY config/ /etc/nginx/
 RUN rm -f /var/log/nginx/access.log /var/log/nginx/error.log &&\
     touch /var/log/nginx/access.log /var/log/nginx/error.log &&\
